@@ -1,10 +1,11 @@
 extends layout
 
 block content
+	if tripImage
+		img(src="#{tripImage}", alt="")
 	h1=locationName
 	p=locationDescrip
-	a(href="/place/#{nextPort}") #{nextPort}
-	//- button(type="button", href="/place/#{nextPort}") #{nextPort}
-
-block scripts
-	script(type="text/javascript", src="voyage.js")
+	if nextPort 
+		a(href="/place/#{nextPort}") #{nextPort} 
+	else 
+		a(href="/place/Seville") Go to Beginning

@@ -2,7 +2,8 @@ var trip = [
 {
   name: "Seville",
   description: "Seville was founded as the Roman city of Hispalis, and was known",
-  nextPort : "Canary Islands"
+  nextPort : "Canary Islands",
+  image : "http://media-cdn.tripadvisor.com/media/photo-s/03/9b/30/2b/seville.jpg"
 }, 
 
 {
