@@ -1,4 +1,10 @@
 extends layout
 
 block content
-	h1 Hello Boulder!
+	h1=locationName
+	p=locationDescrip
+	a(href="/place/#{nextPort}") #{nextPort}
+	//- button(type="button", href="/place/#{nextPort}") #{nextPort}
+
+block scripts
+	script(type="text/javascript", src="voyage.js")
