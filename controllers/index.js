@@ -1,7 +1,6 @@
 var _ = require('underscore');
 var trip = require('../models/voyage.js');
 
-
 // Helper search function
 function search(nameKey, myArray){
   return _.find(myArray, function(obj){
@@ -11,10 +10,12 @@ function search(nameKey, myArray){
 
 var indexController = {
 
+  // Set starting 'index' as Seville
   index : function(req, res){
     res.redirect('/place/Seville');
   },
 
+  // Get each location and treat 404s
   getLocation: function(req, res){
     var resultObject = search(req.params.location, trip);
 
@@ -34,6 +35,7 @@ var indexController = {
     }
   },
 
+  // Give users a JSON response on /next?location=SOMEPLACE query
   getNext: function(req, res){
     var currentLocation = req.query.location;
     var resultObject = search(currentLocation, trip);
