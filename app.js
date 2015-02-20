@@ -1,6 +1,7 @@
 var express = require('express');
 var _ = require('underscore');
-var trip = require('./public/voyage.js')
+var trip = require('./models/voyage.js');
+var indexController = require('./controllers/index.js');
 
 var app = express();
 app.set('view engine', 'jade');
@@ -17,42 +18,15 @@ function search(nameKey, myArray){
 
 
 // Set starting 'index' as Seville
-app.get('/', function(req, res) {
-	res.redirect('/place/Seville');
-});
+app.get('/', indexController.index);
 
 
 // Get each location
-app.get('/place/:location', function(req, res){  
-  var resultObject = search(req.params.location, trip);
-
-  // If the :location exists in the trip database ...
-  if(resultObject){
-    // Render it
-    res.render('index',
-      { locationName : resultObject.name,
-        locationDescrip : resultObject.description,
-        nextPort : resultObject.nextPort,
-        tripImage : resultObject.image
-    });    
-  }
-  // Else send them to the 404
-  else {
-    res.render('404');
-  }
-});
+app.get('/place/:location', indexController.getLocation);
 
 
 // Give users a JSON response on /next query
-app.get('/next', function(req, res){
-  var currentLocation = req.query.location;
-  var resultObject = search(currentLocation, trip);
-  var nextLocation = resultObject.nextPort;
-
-  res.jsonp({ location: currentLocation, 
-              nextLocation: nextLocation });
-
-});
+app.get('/next', indexController.getNext);
 
 
 var server = app.listen(5213, function() {
