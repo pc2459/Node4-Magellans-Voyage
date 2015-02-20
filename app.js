@@ -22,19 +22,18 @@ app.get('/', function(req, res) {
 });
 
 
-app.get('/place/:location', function(req, res){
-
-  
+// Get each location
+app.get('/place/:location', function(req, res){  
   var resultObject = search(req.params.location, trip);
 
   // If the :location exists in the trip database ...
   if(resultObject){
+    // Render it
     res.render('index',
       { locationName : resultObject.name,
         locationDescrip : resultObject.description,
         nextPort : resultObject.nextPort,
         tripImage : resultObject.image
-
     });    
   }
   // Else send them to the 404
@@ -42,6 +41,7 @@ app.get('/place/:location', function(req, res){
     res.render('404');
   }
 });
+
 
 // Give users a JSON response on /next query
 app.get('/next', function(req, res){
